@@ -1,0 +1,3 @@
+include README.md
+include aioradius/protocol/rfc/*
+include tests/fixtures/dictionaries/dict*
