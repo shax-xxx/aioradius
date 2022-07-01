@@ -35,7 +35,7 @@ The keywords and their descriptions are given below.
 import logging
 import os
 
-from bidict import bidict, IGNORE, ValueDuplicationError
+from bidict import bidict, DROP_NEW, ValueDuplicationError
 
 from aioradius.protocol import dictfile
 from aioradius.protocol.datatypes import DATATYPES
@@ -166,9 +166,9 @@ class AttributeDefinition(object):
             self.header_size += (4 + vsa_type_size + vsa_len_size)
 
     def add_values(self, values):
-        """ Adding values for attribute to bidict (used bidict policy IGNORE for duplicates) """
+        """ Adding values for attribute to bidict (used bidict policy DROP_NEW for duplicates) """
         _values = [(item[0], (self.number, item[1])) for item in values if len(item) == 2]
-        self.values.putall(_values, IGNORE, IGNORE, IGNORE)
+        self.values.putall(_values, DROP_NEW, DROP_NEW, DROP_NEW)
 
     @classmethod
     def parse(cls, definition, current_vendor=None):
